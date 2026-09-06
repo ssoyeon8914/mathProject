@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #e8f7f4;
+  --foreground: #0f3d3a;
+  --panel: #ffffff;
+  --teal-glow: #5eead4;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-display);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, #a5f3fc66, transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, #6ee7b766, transparent),
+    linear-gradient(180deg, #dff7f2 0%, #eef9f6 45%, #f5fbf9 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito), "Segoe UI", sans-serif;
+  min-height: 100dvh;
+}
+
+.card-panel {
+  border-radius: 1.25rem;
+  background: color-mix(in oklab, white 88%, transparent);
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px -18px rgb(15 61 58 / 0.35);
+  border: 1px solid rgb(15 61 58 / 0.06);
+  backdrop-filter: blur(8px);
+}
+
+.section-title {
+  font-family: var(--font-display), var(--font-nunito), sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f3d3a;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: #0d9488;
+  color: white;
+  font-weight: 800;
+  padding: 0.85rem 1.25rem;
+  transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  box-shadow: 0 8px 20px -10px rgb(13 148 136 / 0.8);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0f766e;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: white;
+  color: #0f3d3a;
+  font-weight: 800;
+  padding: 0.85rem 1.25rem;
+  border: 2px solid rgb(13 148 136 / 0.25);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.btn-secondary:hover {
+  background: #f0fdfa;
+  border-color: rgb(13 148 136 / 0.5);
+}
+
+.keypad-btn {
+  min-height: 3.4rem;
+  border-radius: 1rem;
+  background: white;
+  color: #0f3d3a;
+  font-size: 1.35rem;
+  font-weight: 800;
+  border: 2px solid rgb(13 148 136 / 0.12);
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+
+.keypad-btn:hover:not(:disabled) {
+  background: #ecfeff;
+}
+
+.keypad-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.keypad-btn:disabled {
+  opacity: 0.4;
+}
+
+.keypad-btn-muted {
+  font-size: 1rem;
+  background: #f0fdfa;
+  color: #115e59;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-pop {
+  animation: pop 320ms ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 280ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop,
+  .animate-fade-in,
+  .btn-primary,
+  .keypad-btn {
+    animation: none;
+    transition: none;
+  }
 }

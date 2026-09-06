@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 수학탐험
 
-## Getting Started
+초등학생을 위한 학년·유형별 수학 문제 풀이 웹 앱입니다.
 
-First, run the development server:
+## 기능
+
+- 1~6학년 · 덧셈/뺄셈/곱셈/나눗셈/분수/소수 연습
+- 도형(변·둘레·넓이) · 단위 환산 · 문장제
+- 난이도(쉬움/보통/어려움) · 문제 수 · 제한 시간 모드
+- 숫자 키패드 · 분수 분자/분모 입력 · 즉시 채점과 짧은 해설
+- 오답 노트 · 최근 성적(로컬 저장)
+- 게스트 ID 자동 발급 · 이름(닉네임) 간단 로그인
+- 진도·약한 유형 대시보드
+
+## 시작하기
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 [http://localhost:3000](http://localhost:3000) 을 엽니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 스크립트
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| 명령 | 설명 |
+|------|------|
+| `npm run dev` | 개발 서버 |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run start` | 프로덕션 서버 |
+| `npm test` | 문제 생성·채점 단위 테스트 |
 
-## Learn More
+## 구조
 
-To learn more about Next.js, take a look at the following resources:
+- `app/` — 페이지 (홈, 풀이, 결과, 오답노트, 성적, 프로필, 진도)
+- `components/` — UI 컴포넌트
+- `lib/curriculum/` — 학년·유형 메타데이터
+- `lib/problems/` — 문제 생성기 · 채점
+- `lib/dashboard.ts` — 진도·약한 유형 집계
+- `lib/storage.ts` — 로컬 스토리지
+- `types/` — 공통 타입
+- `docs/` — 프로젝트 문서
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 문서
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [작업계획서](docs/작업계획서.md) — 목표, 범위, 일정, 구현 체크리스트
+- [인증설계](docs/인증설계.md) — 게스트 ID · 이름 로그인
