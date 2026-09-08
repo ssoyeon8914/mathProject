@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { GRADES, getTopicsForGrade, gradeLabel } from "@/lib/curriculum/topics";
+import { AREAS, GRADES, getTopicsForGrade, gradeLabel } from "@/lib/curriculum/topics";
 import { DEFAULT_PROBLEM_COUNT } from "@/lib/session";
 import { saveQuizConfig, saveQuizProblems } from "@/lib/quiz-state";
 import type { Difficulty, Grade } from "@/types/problem";
@@ -85,24 +85,40 @@ export function HomeClient() {
 
       <section className="card-panel">
         <h2 className="section-title">무엇을 연습할까요?</h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          {topics.map((topic) => (
-            <button
-              key={topic.id}
-              type="button"
-              onClick={() => setTopicId(topic.id)}
-              className={`rounded-2xl border-2 p-4 text-left transition ${
-                activeTopic?.id === topic.id
-                  ? "border-teal-500 bg-teal-50 shadow-sm"
-                  : "border-transparent bg-sky-50/80 hover:border-teal-200"
-              }`}
-            >
-              <p className="font-[family-name:var(--font-display)] text-lg font-bold text-teal-950">
-                {topic.name}
-              </p>
-              <p className="mt-1 text-sm text-teal-800/70">{topic.description}</p>
-            </button>
-          ))}
+        <div className="mt-4 flex flex-col gap-6">
+          {AREAS.map((area) => {
+            const areaTopics = topics.filter((t) => t.area === area.id);
+            if (areaTopics.length === 0) return null;
+            return (
+              <div key={area.id}>
+                <div className="mb-2 flex items-baseline gap-2">
+                  <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-teal-900">
+                    {area.name}
+                  </h3>
+                  <span className="text-xs text-teal-800/60">{area.description}</span>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {areaTopics.map((topic) => (
+                    <button
+                      key={topic.id}
+                      type="button"
+                      onClick={() => setTopicId(topic.id)}
+                      className={`rounded-2xl border-2 p-4 text-left transition ${
+                        activeTopic?.id === topic.id
+                          ? "border-teal-500 bg-teal-50 shadow-sm"
+                          : "border-transparent bg-sky-50/80 hover:border-teal-200"
+                      }`}
+                    >
+                      <p className="font-[family-name:var(--font-display)] text-lg font-bold text-teal-950">
+                        {topic.name}
+                      </p>
+                      <p className="mt-1 text-sm text-teal-800/70">{topic.description}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 

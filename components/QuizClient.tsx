@@ -66,6 +66,7 @@ export function QuizClient() {
           explanation: n.explanation,
           inputType: n.inputType,
           promptLayout: n.promptLayout ?? "story",
+          allowDecimalInput: n.allowDecimalInput,
         }));
       } else {
         loaded = generateProblemSet(
@@ -105,7 +106,7 @@ export function QuizClient() {
 
   const current = problems[index];
   const isFraction = current?.inputType === "fraction";
-  const showDecimal = current?.topicId === "decimal-add";
+  const showDecimal = !!current?.allowDecimalInput;
 
   const finishQuiz = useCallback(
     (finalSession: QuizSession) => {
@@ -249,6 +250,7 @@ export function QuizClient() {
       answeredAt: Date.now(),
       inputType: current.inputType,
       promptLayout: current.promptLayout,
+      allowDecimalInput: current.allowDecimalInput,
     };
 
     const nextSession: QuizSession = {

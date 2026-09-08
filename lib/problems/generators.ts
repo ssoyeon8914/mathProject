@@ -7,6 +7,10 @@ import {
   wholeNumberRange,
 } from "./utils";
 import { EXTRA_GENERATORS } from "./generators-extra";
+import { NUMBER_GENERATORS } from "./generators-number";
+import { RELATION_GENERATORS } from "./generators-relation";
+import { MEASURE_GENERATORS } from "./generators-measure";
+import { DATA_GENERATORS } from "./generators-data";
 
 type Generator = (grade: Grade, difficulty: Difficulty) => Problem;
 
@@ -169,6 +173,7 @@ function generateDecimalAdd(_grade: Grade, difficulty: Difficulty): Problem {
     displayAnswer: String(Number(answer)),
     explanation: `${formatOne(tenthsA)} 더하기 ${formatOne(tenthsB)}는 ${Number(answer)}이에요.`,
     inputType: "number",
+    allowDecimalInput: true,
   };
 }
 
@@ -181,6 +186,10 @@ const GENERATORS: Record<string, Generator> = {
   "fraction-sub": generateFractionSub,
   "decimal-add": generateDecimalAdd,
   ...EXTRA_GENERATORS,
+  ...NUMBER_GENERATORS,
+  ...RELATION_GENERATORS,
+  ...MEASURE_GENERATORS,
+  ...DATA_GENERATORS,
 };
 
 export function generateProblem(
