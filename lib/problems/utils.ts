@@ -36,6 +36,10 @@ export function gcd(a: number, b: number): number {
   return x || 1;
 }
 
+export function lcm(a: number, b: number): number {
+  return Math.abs(a * b) / gcd(a, b);
+}
+
 export function simplifyFraction(num: number, den: number): { num: number; den: number } {
   const g = gcd(num, den);
   return { num: num / g, den: den / g };
@@ -44,4 +48,19 @@ export function simplifyFraction(num: number, den: number): { num: number; den: 
 export function formatFraction(num: number, den: number): string {
   if (den === 1) return String(num);
   return `${num}/${den}`;
+}
+
+/** 부동소수점 오차 없이 소수를 자릿수에 맞춰 반올림해 숫자로 반환 */
+export function roundTo(value: number, digits: number): number {
+  const factor = 10 ** digits;
+  return Math.round((value + Number.EPSILON) * factor) / factor;
+}
+
+/** 불필요한 0을 제거한 소수 문자열 (채점용 정규 문자열) */
+export function formatDecimal(value: number, digits = 2): string {
+  return String(roundTo(value, digits));
+}
+
+export function pickFrom<T>(items: readonly T[]): T {
+  return items[randomInt(0, items.length - 1)];
 }

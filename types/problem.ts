@@ -4,6 +4,9 @@ export type InputType = "number" | "fraction";
 
 export type PromptLayout = "equation" | "story";
 
+/** 2022 개정 교육과정 4개 영역 */
+export type Area = "number" | "relation" | "geometry" | "data";
+
 export interface Problem {
   id: string;
   topicId: string;
@@ -15,6 +18,8 @@ export interface Problem {
   inputType: InputType;
   /** Longer text prompts (문장제·도형 설명 등) use story layout */
   promptLayout?: PromptLayout;
+  /** 숫자 입력 시 소수점 키를 노출할지 여부 */
+  allowDecimalInput?: boolean;
 }
 
 export interface Attempt {
@@ -29,6 +34,7 @@ export interface Attempt {
   answeredAt: number;
   inputType: InputType;
   promptLayout?: PromptLayout;
+  allowDecimalInput?: boolean;
 }
 
 export interface QuizSession {
@@ -49,6 +55,8 @@ export interface TopicDefinition {
   name: string;
   description: string;
   grades: Grade[];
+  /** 2022 개정 교육과정 영역 */
+  area: Area;
   /** Relative difficulty baseline within the curriculum */
   defaultDifficulty: Difficulty;
 }
@@ -76,6 +84,7 @@ export interface WrongNoteItem {
   userAnswer: string;
   inputType: InputType;
   promptLayout?: PromptLayout;
+  allowDecimalInput?: boolean;
   savedAt: number;
   resolved: boolean;
 }

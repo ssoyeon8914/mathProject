@@ -110,6 +110,7 @@ export function addWrongNotesFromAttempts(attempts: Attempt[]): void {
     userAnswer: a.userAnswer,
     inputType: a.inputType,
     promptLayout: a.promptLayout,
+    allowDecimalInput: a.allowDecimalInput,
     savedAt: a.answeredAt,
     resolved: false,
   }));

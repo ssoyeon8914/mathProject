@@ -7,11 +7,17 @@ function pick<T>(items: readonly T[]): T {
   return items[randomInt(0, items.length - 1)];
 }
 
-const SHAPES = [
+// 2022 개정: 1~2학년에서 오각형·육각형 구별 내용이 삭제됨
+const BASIC_SHAPES = [
   { name: "삼각형", sides: 3, vertices: 3 },
   { name: "사각형", sides: 4, vertices: 4 },
   { name: "정사각형", sides: 4, vertices: 4 },
   { name: "직사각형", sides: 4, vertices: 4 },
+] as const;
+
+// 다각형(3~4학년 이상)에서는 오각형·육각형도 다룸
+const SHAPES = [
+  ...BASIC_SHAPES,
   { name: "오각형", sides: 5, vertices: 5 },
   { name: "육각형", sides: 6, vertices: 6 },
 ] as const;
@@ -22,8 +28,8 @@ function sideRange(difficulty: Difficulty, grade: Grade): { min: number; max: nu
   return { min: 5, max: grade <= 4 ? 40 : 50 };
 }
 
-function generateShapeFacts(): Problem {
-  const shape = pick(SHAPES);
+function generateShapeFacts(grade: Grade): Problem {
+  const shape = pick(grade <= 2 ? BASIC_SHAPES : SHAPES);
   const askSides = Math.random() < 0.5;
   const answer = askSides ? shape.sides : shape.vertices;
   const label = askSides ? "변" : "꼭짓점";
@@ -106,9 +112,9 @@ function generateArea(grade: Grade, difficulty: Difficulty): Problem {
 }
 
 export function generateGeometry(grade: Grade, difficulty: Difficulty): Problem {
-  if (grade <= 2) return generateShapeFacts();
+  if (grade <= 2) return generateShapeFacts(grade);
   if (grade <= 4) {
-    return Math.random() < 0.35 ? generateShapeFacts() : generatePerimeter(grade, difficulty);
+    return Math.random() < 0.35 ? generateShapeFacts(grade) : generatePerimeter(grade, difficulty);
   }
   return Math.random() < 0.4
     ? generatePerimeter(grade, difficulty)
