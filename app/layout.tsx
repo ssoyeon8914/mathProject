@@ -1,13 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito, Fredoka } from "next/font/google";
+import { IBM_Plex_Sans_KR, IBM_Plex_Mono, Fredoka } from "next/font/google";
 import { AppHeader } from "@/components/AppHeader";
 import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.css";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+// IBM Plex Sans KR은 한글 글리프를 포함해 파일이 크므로 preload를 끄고
+// latin 서브셋만 preload 대상에서 제외한 채 자체 호스팅한다.
+const ibmPlexSansKr = IBM_Plex_Sans_KR({
+  variable: "--font-ibm-plex-sans-kr",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+  preload: false,
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const fredoka = Fredoka({
@@ -33,7 +42,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${nunito.variable} ${fredoka.variable} h-full`}>
+    <html
+      lang="ko"
+      className={`${ibmPlexSansKr.variable} ${ibmPlexMono.variable} ${fredoka.variable} h-full`}
+    >
       <body className="flex min-h-full flex-col antialiased">
         <AuthProvider>
           <AppHeader />
