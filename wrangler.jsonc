@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers 정적 자산 배포 설정
+  // `npm run build`로 생성된 out/ 폴더를 그대로 정적 사이트로 배포한다.
+  // 서버 코드(main)가 없는 assets-only Worker 이다.
+  "name": "math-project",
+  "compatibility_date": "2026-09-09",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
