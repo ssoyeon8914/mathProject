@@ -10,7 +10,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-nunito);
+  --font-sans: var(--font-ibm-plex-sans-kr), "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
   --font-display: var(--font-display);
 }
 
@@ -20,7 +21,7 @@ body {
     radial-gradient(ellipse 60% 40% at 100% 0%, #6ee7b766, transparent),
     linear-gradient(180deg, #dff7f2 0%, #eef9f6 45%, #f5fbf9 100%);
   color: var(--foreground);
-  font-family: var(--font-nunito), "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   min-height: 100dvh;
 }
 
@@ -34,7 +35,7 @@ body {
 }
 
 .section-title {
-  font-family: var(--font-display), var(--font-nunito), sans-serif;
+  font-family: var(--font-display), var(--font-sans);
   font-size: 1.15rem;
   font-weight: 800;
   color: #0f3d3a;
